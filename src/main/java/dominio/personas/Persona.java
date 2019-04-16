@@ -1,22 +1,96 @@
-Unstaged changes after reset:
-D	src/main/java/dominio/Calor.java
-D	src/main/java/dominio/Cielo.java
-D	src/main/java/dominio/Clima.java
-D	src/main/java/dominio/Frio.java
-D	src/main/java/dominio/Limites.java
-D	src/main/java/dominio/Lluvioso.java
-D	src/main/java/dominio/Noche.java
-D	src/main/java/dominio/Nuboso.java
-D	src/main/java/dominio/Persona.java
-D	src/main/java/dominio/Soleado.java
-M	src/main/java/dominio/clima/Calor.java
-M	src/main/java/dominio/clima/Cielo.java
-M	src/main/java/dominio/clima/Clima.java
-M	src/main/java/dominio/clima/Frio.java
-M	src/main/java/dominio/clima/Limites.java
-M	src/main/java/dominio/clima/Lluvioso.java
-M	src/main/java/dominio/clima/Noche.java
-M	src/main/java/dominio/clima/Nuboso.java
-M	src/main/java/dominio/clima/Soleado.java
-M	src/main/java/dominio/personas/Persona.java
-M	src/main/java/dominio/prendas/Prenda.java
+package dominio.personas;
+import java.util.LinkedList;
+import java.util.List;
+import dominio.prendas.*;
+	
+	
+
+public abstract class Persona {
+	private String nombre;
+	private int edad;
+	private int talla;
+	private Estilo estilo;
+
+
+
+
+	private List<Prenda> prendas;
+	
+	public Persona(String nombre, int edad, int talla, Estilo est) {
+		super();
+		this.nombre = nombre;
+		this.edad = edad;
+		this.talla = talla;
+		this.estilo = est;
+		this.prendas = new LinkedList<>();
+	}
+	
+	public void addPrenda(Prenda prenda){
+		this.prendas.add(prenda);
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public Integer getEdad() {
+		return edad;
+	}
+	
+	public Integer getTalla() {
+		return talla;
+	}
+	
+	public Estilo getEstilo() {
+		return estilo;
+	}
+	
+	protected void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	protected void setEdad(int edad) {
+		this.edad = edad;
+	}
+	
+	protected void setTalla(int talla) {
+		this.talla = talla;
+	}
+	
+	protected void setEstilo(Estilo estilo) {
+		this.estilo = estilo;
+	}
+	
+	public boolean esVaron() {
+		return false;
+	}
+
+	public boolean esMujer() {
+		return false;
+	}
+
+	public boolean esNinio() {
+		return false;
+	}
+	
+	public boolean esBebe() {
+		return false;
+	}
+
+	public boolean esAnciano() {
+		return false;
+	}
+	
+	public boolean estaDesnudo() {
+		return this.prendas.isEmpty();
+	}
+	
+	public boolean prendaTalla(int talla) {
+		return this.prendas.stream().anyMatch(prenda->prenda.getTalla() == talla);
+	}
+	
+	public void pedirSugerencia() {
+		
+	}
+	
+}

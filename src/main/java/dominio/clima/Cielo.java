@@ -1,14 +1,29 @@
-Unstaged changes after reset:
-D	src/main/java/dominio/Calor.java
-D	src/main/java/dominio/Cielo.java
-M	src/main/java/dominio/clima/Calor.java
-M	src/main/java/dominio/clima/Cielo.java
-M	src/main/java/dominio/clima/Clima.java
-M	src/main/java/dominio/clima/Frio.java
-M	src/main/java/dominio/clima/Limites.java
-M	src/main/java/dominio/clima/Lluvioso.java
-M	src/main/java/dominio/clima/Noche.java
-M	src/main/java/dominio/clima/Nuboso.java
-M	src/main/java/dominio/clima/Soleado.java
-M	src/main/java/dominio/personas/Persona.java
-M	src/main/java/dominio/prendas/Prenda.java
+package dominio.clima;
+
+public abstract class Cielo {
+
+	public Cielo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean esNuboso() {
+		return false;
+	}
+
+	public boolean estaLloviendo() {
+		return false;
+	}
+	
+	public boolean estaSoleado() {
+		return false;
+	}
+	
+	public boolean esDeNoche(){
+		return false;
+	}
+
+}
+
+
+	

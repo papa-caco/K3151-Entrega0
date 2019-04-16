@@ -1,15 +1,71 @@
-Unstaged changes after reset:
-D	src/main/java/dominio/Calor.java
-D	src/main/java/dominio/Cielo.java
-D	src/main/java/dominio/Clima.java
-M	src/main/java/dominio/clima/Calor.java
-M	src/main/java/dominio/clima/Cielo.java
-M	src/main/java/dominio/clima/Clima.java
-M	src/main/java/dominio/clima/Frio.java
-M	src/main/java/dominio/clima/Limites.java
-M	src/main/java/dominio/clima/Lluvioso.java
-M	src/main/java/dominio/clima/Noche.java
-M	src/main/java/dominio/clima/Nuboso.java
-M	src/main/java/dominio/clima/Soleado.java
-M	src/main/java/dominio/personas/Persona.java
-M	src/main/java/dominio/prendas/Prenda.java
+package dominio.clima;
+
+public class Clima {
+	
+	private Frio limiteFrio;
+	private Calor limiteCalor;
+	protected Double temperatura;
+	protected Double velocidadViento;
+	protected Cielo cielo;
+	
+	public Clima(Double temp, Double veloc, Double frio, Double calor, Cielo cielo) {
+		this.temperatura = temp;
+		this.velocidadViento = veloc;
+		this.limiteFrio = new Frio(frio);
+		this.limiteCalor = new Calor(calor);
+		this.cielo = cielo;
+	}
+	
+	public Double getTemperatura() {
+		return temperatura;
+	}
+	
+	protected void setTemperatura(Double temperatura) {
+		this.temperatura = temperatura;
+	}
+	
+	public Double getVelocidadViento() {
+		return velocidadViento;
+	}
+	
+	public void setVelocidadViento(Double velocidadViento) {
+		this.velocidadViento = velocidadViento;
+	}
+	
+	protected Cielo getCielo() {
+		return cielo;
+	}
+
+	protected void setCielo(Cielo cielo) {
+		this.cielo = cielo;
+	}
+	
+	public boolean esCalido() {
+		return this.temperatura >= this.limiteCalor.tempLimite;
+	}
+	
+	public boolean esFrio() {
+		return this.temperatura <= this.limiteFrio.tempLimite;
+	}
+	
+	public boolean estaNublado() {
+		 return this.cielo.esNuboso();
+	}
+	
+	public boolean esLluvioso() {
+		return this.cielo.estaLloviendo();
+	}
+	
+	public boolean esVentoso() {
+		return this.velocidadViento > 30.0;
+	}
+	
+	public boolean esDiurno() {
+		return this.cielo.estaSoleado();
+	}
+	
+	public boolean esNocturno() {
+		return this.cielo.esDeNoche();
+	}
+	
+}
