@@ -2,17 +2,15 @@ package dominio.clima;
 
 public class Clima {
 	
-	private Frio limiteFrio;
-	private Calor limiteCalor;
+	private Frio frio;
+	private Calor calor;
 	protected Double temperatura;
-	protected Double velocidadViento;
 	protected Cielo cielo;
 	
-	public Clima(Double temp, Double veloc, Double frio, Double calor, Cielo cielo) {
+	public Clima(Double temp, Cielo cielo) {
 		this.temperatura = temp;
-		this.velocidadViento = veloc;
-		this.limiteFrio = new Frio(frio);
-		this.limiteCalor = new Calor(calor);
+		this.frio = new Frio(10.0);
+		this.calor = new Calor(25.0);
 		this.cielo = cielo;
 	}
 	
@@ -24,15 +22,23 @@ public class Clima {
 		this.temperatura = temperatura;
 	}
 	
-	public Double getVelocidadViento() {
-		return velocidadViento;
+	protected Frio getFrio() {
+		return frio;
 	}
-	
-	public void setVelocidadViento(Double velocidadViento) {
-		this.velocidadViento = velocidadViento;
+
+	protected void setFrio(Frio frio) {
+		this.frio = frio;
 	}
-	
-	protected Cielo getCielo() {
+
+	protected Calor getCalor() {
+		return calor;
+	}
+
+	protected void setCalor(Calor calor) {
+		this.calor = calor;
+	}
+
+	public Cielo getCielo() {
 		return cielo;
 	}
 
@@ -40,32 +46,55 @@ public class Clima {
 		this.cielo = cielo;
 	}
 	
-	public boolean esCalido() {
-		return this.temperatura >= this.limiteCalor.tempLimite;
+	protected boolean esCalido() {
+		return this.temperatura >= this.calor.tempLimite;
 	}
 	
-	public boolean esFrio() {
-		return this.temperatura <= this.limiteFrio.tempLimite;
+	protected boolean esFrio() {
+		return this.temperatura <= this.frio.tempLimite;
 	}
 	
-	public boolean estaNublado() {
+	protected boolean estaNublado() {
 		 return this.cielo.esNuboso();
 	}
 	
-	public boolean esLluvioso() {
+	protected boolean esLluvioso() {
 		return this.cielo.estaLloviendo();
 	}
 	
-	public boolean esVentoso() {
-		return this.velocidadViento > 30.0;
-	}
-	
-	public boolean esDiurno() {
+	protected boolean esSoleado() {
 		return this.cielo.estaSoleado();
 	}
 	
-	public boolean esNocturno() {
+	protected boolean esNocturno() {
 		return this.cielo.esDeNoche();
+	}
+	
+	public String  marcaTermica() {
+		if (this.esFrio()) {
+			return "Frio";
+			}
+		if (this.esCalido()) {
+			return "Calido";
+			}
+		else {
+			return "Templado";
+		}
+	}
+	
+	public String  condiciones() {
+		if (this.esLluvioso()) {
+			return "Lluvioso";
+			}
+		if (this.estaNublado()) {
+			return "Nublado";
+			}
+		if (this.esNocturno()) {
+			return "Nocturno";
+			}
+		else {
+			return "Soleado";
+		}
 	}
 	
 }

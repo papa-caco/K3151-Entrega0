@@ -1,26 +1,36 @@
 package dominio.clima;
 
-public abstract class Cielo {
-
-	public Cielo() {
+public class Cielo {
+	
+	private String estado;
+	
+	public Cielo(String estado) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.estado = estado;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	protected void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public boolean esNuboso() {
-		return false;
+		return this.estado == "Nuboso";
 	}
 
 	public boolean estaLloviendo() {
-		return false;
+		return this.estado == "Lloviendo";
 	}
 	
 	public boolean estaSoleado() {
-		return false;
+		return this.estado == "Soleado";
 	}
 	
 	public boolean esDeNoche(){
-		return false;
+		return this.estado == "Noche";
 	}
 
 }

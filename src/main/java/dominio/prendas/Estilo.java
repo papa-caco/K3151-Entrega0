@@ -1,26 +1,20 @@
 package dominio.prendas;
 
-public abstract class Estilo {
-
-	public Estilo() {
+public class Estilo {
+	
+	private String tipo;
+	
+	public Estilo(String tipo) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.tipo = tipo;
 	}
 	
-	public boolean esCasual() {
-		return false;
+	public String tipo() {
+		return tipo;
 	}
-	
-	public boolean esFormal() {
-		return false;		
-	}
-	
-	public boolean esDeEtiqueta() {
-		return false;		
-	}
-	
-	public boolean esDeportivo() {
-		return false;		
+
+	protected void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
