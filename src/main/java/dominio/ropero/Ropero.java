@@ -54,7 +54,6 @@ public class Ropero {
 		}
 	}
 
-	
 	public int capacidadDisponible() {
 		return this.capacidadMaxima - this.prendas.size();
 	}
@@ -63,28 +62,12 @@ public class Ropero {
 		return this.capacidadDisponible() == 0; 
 	}
 	
-	protected boolean prendaParaPersona(Prenda prenda, Persona persona) {
-		return persona.leCalzaBien(prenda);
-	}
-	
-	protected boolean prendaParaClima(Prenda prenda, Fecha hoy) {
-		return prenda.idealParaClimaDe(hoy);
-	}
-	
-	protected boolean prendaParaPonerEn(Prenda prenda, String donde) {
-		return prenda.paraPonerEn(donde);
-	}
-	
-	protected boolean prendaParaUso(Prenda prenda, String unUso) {
-		return prenda.paraUso(unUso);
-	}
-	
 	protected boolean prendaSeleccionadaPor
 		(Prenda prenda, Persona persona, String unUso, String donde, Fecha hoy) {
-		return this.prendaParaPersona(prenda, persona) &&
-			   this.prendaParaClima(prenda, hoy) &&
-			   this.prendaParaUso(prenda, unUso) &&
-			   this.prendaParaPonerEn(prenda, donde);
+		return persona.leCalzaBien(prenda) &&
+			   prenda.idealParaClimaDe(hoy) &&
+			   prenda.paraPonerEn(donde) &&
+			   prenda.paraUso(unUso);
 	}
 	
 	protected Prenda seleccionoCualquierPrenda(List<Prenda> prendas) {
@@ -99,31 +82,32 @@ public class Ropero {
 	}
 
 	protected Prenda seleccionoPrendaPor(Persona persona, String unUso, String donde, Fecha hoy) 
-			throws SinPrendasException {
-			List<Prenda> prendasR = this.filtroPrendasPor(persona, unUso, donde, hoy);
-			if (prendasR.isEmpty()) {
-				throw new SinPrendasException();
-			}
-			else {
+		throws SinPrendasException {
+		List<Prenda> prendasR = this.filtroPrendasPor(persona, unUso, donde, hoy);
+		if (prendasR.isEmpty()) {
+			throw new SinPrendasException();
+		}
+		else {
 				return this.seleccionoCualquierPrenda(prendasR);
-			}
-	}
+		}
 	
-		
+	}
+			
 	protected List<Prenda> prendasIntimas(Persona persona, Fecha hoy)
 			throws SinPrendasException,RoperoVacioException {
 		List<Prenda> interiores = new ArrayList<>();
 		if (persona.esVaron()) {
-			Prenda unaPrenda = this.seleccionoPrendaPor(persona, "Interior", "IntimasMasculino", hoy);
-			interiores.add(unaPrenda);
-			return interiores;
-			}
-		else {
-			Prenda prenda1 = this.seleccionoPrendaPor(persona, "Interior", "IntimasFemeninoInf", hoy);
-			Prenda prenda2 = this.seleccionoPrendaPor(persona, "Interior", "IntimasFemeninoSup", hoy);
-			interiores = Arrays.asList(prenda1, prenda2);
-			return interiores;
+				Prenda unaPrenda = this.seleccionoPrendaPor(persona, "Interior", "IntimasMasculino", hoy);
+				interiores.add(unaPrenda);
+				return interiores;
 		}
+		else {
+				Prenda prenda1 = this.seleccionoPrendaPor(persona, "Interior", "IntimasFemeninoInf", hoy);
+				Prenda prenda2 = this.seleccionoPrendaPor(persona, "Interior", "IntimasFemeninoSup", hoy);
+				interiores = Arrays.asList(prenda1, prenda2);
+				return interiores;
+		}
+	
 	}
 	
 	protected List<Prenda> prendasNoIntimas(Persona persona, Fecha hoy) throws SinPrendasException {
@@ -152,6 +136,7 @@ public class Ropero {
 		else {
 			this.prendas.removeAll(prendas);
 		}
+	
 	}
 	
 	public void recepcionDePrendas(List<Prenda> prendas) 
@@ -162,9 +147,7 @@ public class Ropero {
 		else {
 			this.prendas.addAll(prendas);
 		}
+	
 	}
-	
-	
-	
 	
 }
