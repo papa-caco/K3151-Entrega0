@@ -1,6 +1,9 @@
 package dominio.personas;
 import java.util.List;
 import dominio.prendas.*;
+import dominio.ropero.*;
+import dominio.excepciones.*;
+import dominio.clima.*;
 
 public abstract class Persona {
 
@@ -64,11 +67,11 @@ public abstract class Persona {
 		this.prendas.add(prenda);
 	}
 	
-	protected boolean esVaron() {
+	public boolean esVaron() {
 		return false;
 	}
 
-	protected boolean esMujer() {
+	public boolean esMujer() {
 		return false;
 	}
 	
@@ -104,12 +107,54 @@ public abstract class Persona {
 		return this.prendas.isEmpty();
 	}
 	
-	public boolean prendaTalla(int talla) {
-		return this.prendas.stream().anyMatch(prenda->prenda.talla() == talla);
+	protected boolean coincideTalla(Prenda prenda) {
+		return this.talla == prenda.talla();
 	}
 	
-	public void pedirSugerencia() {
+	protected boolean coincideGenero(Prenda prenda) {
+		return this.sexo() == prenda.genero();
+	}
+	
+	protected boolean coincideEstilo(Prenda prenda) {
+		return this.estilo.tipo() == prenda.estilo().tipo();
+	}
+	
+	protected boolean coincideFranjaEtarea(Prenda prenda) {
+		return this.franjaEtarea() == prenda.esPara();
+	}
+	
+	public boolean leCalzaBien(Prenda prenda) {
+		return this.coincideTalla(prenda) 
+			&& this.coincideGenero(prenda)
+			&& this.coincideEstilo(prenda) 
+			&& this.coincideFranjaEtarea(prenda);
+	}
+	
+	protected List<Prenda> pedirSugerencia(Ropero ropero, Fecha hoy) 
+		throws SinPrendasException, RoperoVacioException {
+		return ropero.sugerenciaPrendas(this,hoy);
+	}
+	
+	public void desvestirse(Ropero ropero) throws RoperoFullException {
+		if (this.prendas.size() > ropero.capacidadDisponible()) {
+			throw new RoperoFullException();
+			}
+		else {
+			ropero.recepcionDePrendas(this.prendas);
+			this.prendas.clear();
+		}
 		
 	}
 	
+	public void vestirSugerencia(Ropero ropero, Fecha hoy) 
+		throws SinPrendasException, RoperoVacioException, RoperoFullException {
+			List<Prenda> sugerencia = this.pedirSugerencia(ropero, hoy);
+			if (!this.estaDesnudo()) {
+				this.desvestirse(ropero);
+				}
+			else {
+				this.prendas.addAll(sugerencia);
+			}
+	}
+		
 }
