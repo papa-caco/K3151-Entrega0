@@ -1,5 +1,6 @@
 package dominio.personas;
 import java.util.List;
+import java.util.ArrayList;
 import dominio.prendas.*;
 import dominio.ropero.*;
 import dominio.excepciones.*;
@@ -7,12 +8,12 @@ import dominio.clima.*;
 
 public abstract class Persona {
 
-	private String nombre;
-	private int edad;
+	protected String nombre;
+	protected int edad;
 	protected String sexo;
-	private int talla;
-	private Estilo estilo;
-	private List<Prenda> prendas;
+	protected int talla;
+	protected Estilo estilo;
+	protected List<Prenda> prendas;
 	
 	public Persona(String nombre, int edad, int talla, Estilo estilo, List<Prenda> prendas) {
 		super();
@@ -20,7 +21,7 @@ public abstract class Persona {
 		this.edad = edad;
 		this.talla = talla;
 		this.estilo = estilo;
-		this.prendas = prendas;
+		this.prendas = new ArrayList<>();
 	}
 
 	public String sexo() {
@@ -43,11 +44,15 @@ public abstract class Persona {
 		return estilo;
 	}
 	
+	public List<Prenda> getPrendas() {
+		return prendas;
+	}
+	
 	protected void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	protected void setEdad(int edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 	
@@ -55,16 +60,32 @@ public abstract class Persona {
 		this.sexo = sexo;
 	}
 	
-	protected void setTalla(int talla) {
+	public void setTalla(int talla) {
 		this.talla = talla;
 	}
 	
-	protected void setEstilo(Estilo estilo) {
+	public void setEstilo(Estilo estilo) {
 		this.estilo = estilo;
 	}
 	
-	public void addPrenda(Prenda prenda){
-		this.prendas.add(prenda);
+	protected void addPrenda(Prenda prenda) throws PrendaNoLeVaException {
+		
+		if (this.leCalzaBien(prenda)) {
+			this.prendas.add(prenda);
+		}
+		else {
+			throw new PrendaNoLeVaException();
+		}
+	}
+	
+	public void sePone(Prenda prenda) throws PrendaNoLeVaException {
+		try {
+			this.addPrenda(prenda);
+		}
+		catch (PrendaNoLeVaException exception) {
+			throw exception;
+		}
+	
 	}
 	
 	public boolean esVaron() {
@@ -101,7 +122,6 @@ public abstract class Persona {
 			return "Adulto";
 		}
 	}
-
 	
 	public boolean estaDesnudo() {
 		return this.prendas.isEmpty();
@@ -148,13 +168,25 @@ public abstract class Persona {
 	
 	public void vestirSugerencia(Ropero ropero, Fecha hoy) 
 		throws SinPrendasException, RoperoVacioException, RoperoFullException {
+		try {
 			List<Prenda> sugerencia = this.pedirSugerencia(ropero, hoy);
 			if (!this.estaDesnudo()) {
 				this.desvestirse(ropero);
 				}
 			else {
 				this.prendas.addAll(sugerencia);
+				}
 			}
+		catch (SinPrendasException exception) {
+			throw exception;
+			}
+		catch (RoperoVacioException exception) {
+			throw exception;
+			}
+		catch (RoperoFullException exception) {
+			throw exception;
+			}
+	
 	}
 		
 }

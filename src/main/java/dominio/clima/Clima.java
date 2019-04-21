@@ -18,7 +18,7 @@ public class Clima {
 		return temperatura;
 	}
 	
-	protected void setTemperatura(Double temperatura) {
+	public void setTemperatura(Double temperatura) {
 		this.temperatura = temperatura;
 	}
 	
@@ -42,7 +42,7 @@ public class Clima {
 		return cielo;
 	}
 
-	protected void setCielo(Cielo cielo) {
+	public void setCielo(Cielo cielo) {
 		this.cielo = cielo;
 	}
 	

@@ -1,24 +1,23 @@
 package dominio.clima;
-import java.util.Date;
-import com.sun.jmx.snmp.Timestamp;
+import java.sql.Date;
 
 public class Fecha {
 	
-	private Date fecha;
+	private String fecha;
 	private Clima clima;
 	
 	public Fecha(Clima clima) {
 		super();
 		this.clima = clima;
-		Timestamp ahora = new Timestamp(System.currentTimeMillis());
-		this.fecha = ahora.getDate();
+		Date hoy = new Date(System.currentTimeMillis());
+		this.fecha = hoy.toString();
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	protected void setFecha(Date fecha) {
+	protected void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

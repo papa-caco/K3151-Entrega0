@@ -1,9 +1,9 @@
 package dominio.prendas.inferiores;
 import dominio.prendas.*;
 
-public class Short extends Prenda {
+public class Shorcito extends Prenda {
 
-	public Short(Integer talla, String genero,
+	public Shorcito(Integer talla, String genero,
 				 String esPara, Color color) {
 		super(talla, genero, esPara, color);
 		// TODO Auto-generated constructor stub
