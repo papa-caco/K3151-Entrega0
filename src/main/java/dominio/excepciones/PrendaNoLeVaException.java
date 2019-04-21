@@ -4,7 +4,7 @@ package dominio.excepciones;
 public class PrendaNoLeVaException extends Exception {
 
 	public PrendaNoLeVaException() {
-		super("La prenda no le calza");
+		super("La prenda no le calza ");
 	}
 
 }

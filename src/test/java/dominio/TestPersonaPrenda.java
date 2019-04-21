@@ -37,30 +37,30 @@ public class TestPersonaPrenda {
 	this.jose = new Hombre("Jose",35,48,new Estilo("Casual"), prendas);
 	}
 	
-	@Test
-	public void aJoseLeVaBienPantalon() {
+	@Test // -- T E S T #01 --//
+	public void nro01_aJoseLeVaBienPantalon() {
 		Assert.assertTrue(jose.leCalzaBien(pantalon));
 		Assert.assertEquals(0,jose.getPrendas().size());
 		Assert.assertTrue(jose.estaDesnudo());
 	}
 	
-	@Test
-	public void joseNoPuedeUsarZapatillas() {
+	@Test // -- T E S T #02 --//
+	public void nro02_joseNoPuedeUsarZapatillas() {
 		Assert.assertFalse(jose.leCalzaBien(zapas));
 		jose.setEstilo(new Estilo("Deportivo"));
 		Assert.assertTrue(jose.leCalzaBien(zapas));
 	}
 	
-	@Test
-	public void estaFrescoParaRemera() {
+	@Test // -- T E S T #03 --//
+	public void nro03_estaFrescoParaRemera() {
 		Assert.assertFalse(remera.idealParaClimaDe(hoy));
 		Assert.assertTrue(remera.idealClima() == "Calido");
 		clima.setTemperatura(30.0);
 		Assert.assertTrue(remera.idealParaClimaDe(hoy));
 	}
 	
-	@Test
-	public void joseSePoneVariasPrendasQueLeVan() {
+	@Test // -- T E S T #04 --//
+	public void nro04_joseSePoneVariasPrendasQueLeVan() {
 		try {
 			jose.sePone(medias);
 			jose.sePone(calzoncillo);
@@ -69,23 +69,23 @@ public class TestPersonaPrenda {
 			Assert.assertEquals(4,jose.getPrendas().size());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print(exception.getMessage());
+            System.out.print("TEST #04 " + exception.getMessage());
 		}
 	}
 	
-	@Test
-	public void joseSePoneCamisaYnoLeVa() {
+	@Test // -- T E S T #05 --//
+	public void nro05_joseSePoneCamisaYnoLeVa() {
 		try {
 			jose.sePone(camisa);
 			Assert.assertEquals(1,jose.getPrendas().size());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print(exception.getMessage());
+            System.out.print("TEST #05 " + exception.getMessage());
 		}
 	}
 
-	@Test
-	public void joseEnvejecioYpuedeUsarCamisaDelAbuelo() {
+	@Test // -- T E S T #06 --//
+	public void nro06_joseEnvejecioYpuedeUsarCamisaDelAbuelo() {
 		Assert.assertFalse(jose.leCalzaBien(camisa));
 		jose.setEstilo(new Estilo("Formal"));
 		jose.setTalla(50);

@@ -1,6 +1,6 @@
 package dominio.personas;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import dominio.prendas.*;
 import dominio.ropero.*;
 import dominio.excepciones.*;
@@ -21,7 +21,7 @@ public abstract class Persona {
 		this.edad = edad;
 		this.talla = talla;
 		this.estilo = estilo;
-		this.prendas = new ArrayList<>();
+		this.prendas = new LinkedList<>();
 	}
 
 	public String sexo() {
@@ -85,7 +85,6 @@ public abstract class Persona {
 		catch (PrendaNoLeVaException exception) {
 			throw exception;
 		}
-	
 	}
 	
 	public boolean esVaron() {
@@ -150,12 +149,16 @@ public abstract class Persona {
 			&& this.coincideFranjaEtarea(prenda);
 	}
 	
-	protected List<Prenda> pedirSugerencia(Ropero ropero, Fecha hoy) 
-		throws SinPrendasException, RoperoVacioException {
-		return ropero.sugerenciaPrendas(this,hoy);
+	public List<Prenda> pedirSugerencia(Ropero ropero, Fecha hoy) throws SinPrendasException {
+		try {
+			return ropero.sugerenciaPrendas(this,hoy);
+		}
+		catch (SinPrendasException exception) {
+			throw exception;
+		}
 	}
 	
-	public void desvestirse(Ropero ropero) throws RoperoFullException {
+	protected void devolverPilchas(Ropero ropero) throws RoperoFullException {
 		if (this.prendas.size() > ropero.capacidadDisponible()) {
 			throw new RoperoFullException();
 			}
@@ -163,30 +166,35 @@ public abstract class Persona {
 			ropero.recepcionDePrendas(this.prendas);
 			this.prendas.clear();
 		}
-		
+	}
+	
+	public void desvestirse(Ropero ropero) throws RoperoFullException {
+		try {
+			this.devolverPilchas(ropero);
+		}
+		catch (RoperoFullException exception) {
+			throw exception;
+		}
 	}
 	
 	public void vestirSugerencia(Ropero ropero, Fecha hoy) 
-		throws SinPrendasException, RoperoVacioException, RoperoFullException {
+		throws SinPrendasException, RoperoFullException {
 		try {
 			List<Prenda> sugerencia = this.pedirSugerencia(ropero, hoy);
 			if (!this.estaDesnudo()) {
 				this.desvestirse(ropero);
 				}
 			else {
+				ropero.entregaDePrendas(sugerencia);
 				this.prendas.addAll(sugerencia);
 				}
-			}
+		}
 		catch (SinPrendasException exception) {
 			throw exception;
-			}
-		catch (RoperoVacioException exception) {
-			throw exception;
-			}
+		}
 		catch (RoperoFullException exception) {
 			throw exception;
-			}
-	
+		}
 	}
 		
 }

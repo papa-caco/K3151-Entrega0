@@ -9,7 +9,7 @@ public class Calza extends Prenda {
 		// TODO Auto-generated constructor stub
 		this.estilo = new Estilo("Deportivo");
 		this.sePoneEn = "Piernas";
-		this.uso = "Interior";
+		this.uso = "Exterior";
 	}
 
 }

@@ -4,7 +4,7 @@ package dominio.excepciones;
 public class RoperoFullException extends Exception {
 
 	public RoperoFullException() {
-		super("Ropero Lleno");
+		super("Ropero Lleno ");
 	}
 
 }
