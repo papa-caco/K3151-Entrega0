@@ -55,6 +55,7 @@ public class TestPersonaPrenda {
 	public void nro03_estaFrescoParaRemera() {
 		Assert.assertFalse(remera.idealParaClimaDe(hoy));
 		Assert.assertTrue(remera.idealClima() == "Calido");
+		System.out.println("TEST #03 - El clima de hoy, " + hoy.getFecha() + ", es: " + hoy.condicionesClima());
 		clima.setTemperatura(30.0);
 		Assert.assertTrue(remera.idealParaClimaDe(hoy));
 	}
@@ -66,10 +67,11 @@ public class TestPersonaPrenda {
 			jose.sePone(calzoncillo);
 			jose.sePone(pantalon);
 			jose.sePone(remera);
+			System.out.println("TEST #04 - Jose tiene en total: " + jose.getPrendas().size() + " prendas puestas.");
 			Assert.assertEquals(4,jose.getPrendas().size());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print("TEST #04 " + exception.getMessage());
+            System.out.println("TEST #04 " + exception.getMessage());
 		}
 	}
 	
@@ -80,7 +82,7 @@ public class TestPersonaPrenda {
 			Assert.assertEquals(1,jose.getPrendas().size());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print("TEST #05 " + exception.getMessage());
+            System.out.println("TEST #05 - " + exception.getMessage());
 		}
 	}
 

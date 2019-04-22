@@ -78,6 +78,7 @@ public class TestPersonasRopero {
 	
 	@Test // -- T E S T  #01 --//
 	public void nro01_chequeoCapacidadRopero() {
+		System.out.println("TEST #01 - Los colores de las prendas cargadas son: " + ropero.getPrendas().toString()); 
 		Assert.assertFalse(ropero.fullCapacidad());
 		Assert.assertEquals(14,ropero.capacidadDisponible());
 	}
@@ -91,7 +92,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(16,this.ropero.capacidadDisponible());
 		}
 		catch (SinPrendasException exception) {
-			System.out.print("TEST #02 " + exception.getMessage());
+			System.out.println("TEST #02 " + exception.getMessage());
 		}
 	}
 	
@@ -106,10 +107,10 @@ public class TestPersonasRopero {
 			Assert.assertEquals(30,this.ropero.capacidadDisponible());
 		}
 		catch (RoperoVacioException exception) {
-			System.out.print("TEST #03 " + exception.getMessage());
+			System.out.println("TEST #03 " + exception.getMessage());
 		}
 		catch (SinPrendasException exception) {
-			System.out.print("TEST #03 " + exception.getMessage());
+			System.out.println("TEST #03 " + exception.getMessage());
 		}
 	}
 
@@ -123,7 +124,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(30,this.ropero.capacidadDisponible());
 		}
 		catch (SinPrendasException exception) {
-			System.out.print("TEST #04 " + exception.getMessage());
+			System.out.println("TEST #04 " + exception.getMessage());
 		}
 	}
 	
@@ -137,7 +138,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(0,this.ropero.capacidadDisponible());
 		}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #05 " + exception.getMessage());
+			System.out.println("TEST #05 " + exception.getMessage());
 		}
 	}
 
@@ -151,7 +152,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(0,this.ropero.capacidadDisponible());
 		}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #06 " + exception.getMessage());
+			System.out.println("TEST #06 " + exception.getMessage());
 		}
 	}
 	
@@ -168,10 +169,10 @@ public class TestPersonasRopero {
 			Assert.assertEquals(10,this.ropero.capacidadDisponible());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print("TEST #07 " + exception.getMessage());
+            System.out.println("TEST #07 " + exception.getMessage());
 		}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #07 " + exception.getMessage());
+			System.out.println("TEST #07 " + exception.getMessage());
 		}
 	}
 	
@@ -184,16 +185,17 @@ public class TestPersonasRopero {
 			maria.sePone(remeraM);
 			maria.sePone(calza);
 			Assert.assertTrue(!maria.estaDesnudo());
+			System.out.println("TEST #08 " + maria.getPrendas().toString());
 			Assert.assertEquals(5,maria.getPrendas().size());
 			maria.desvestirse(ropero);
 			Assert.assertTrue(maria.estaDesnudo());
 			Assert.assertEquals(9,this.ropero.capacidadDisponible());
 		}
 		catch (PrendaNoLeVaException exception) {
-            System.out.print("TEST #08 " + exception.getMessage());
+            System.out.println("TEST #08 " + exception.getMessage());
 		}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #08 " + exception.getMessage());
+			System.out.println("TEST #08 " + exception.getMessage());
 		}
 	}
 	
@@ -201,10 +203,11 @@ public class TestPersonasRopero {
 	public void nro09_josePideSugerenciaParaHoy() {
 		try {
 			List<Prenda> sugerenciaJose = jose.pedirSugerencia(ropero, hoy);
+			System.out.println("TEST #09 " + sugerenciaJose.toString());
 			Assert.assertEquals(5,sugerenciaJose.size());
 			}
 			catch (SinPrendasException exception) {
-				System.out.print("TEST #09 " + exception.getMessage());
+				System.out.println("TEST #09 " + exception.getMessage());
 			}
 		}
 	
@@ -215,7 +218,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(55,sugerenciaJose.size());
 			}
 		catch (SinPrendasException exception) {
-			System.out.print("TEST #10 " + exception.getMessage());
+			System.out.println("TEST #10 " + exception.getMessage());
 			}
 	}
 
@@ -226,7 +229,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(6,sugerenciaMaria.size());
 			}
 		catch (SinPrendasException exception) {
-				System.out.print("TEST #11 " + exception.getMessage() );
+				System.out.println("TEST #11 " + exception.getMessage() );
 			}
 	}
 	
@@ -237,7 +240,7 @@ public class TestPersonasRopero {
 			Assert.assertEquals(8,sugerenciaMaria.size());
 			}
 		catch (SinPrendasException exception) {
-				System.out.print("TEST #12 " + exception.getMessage() );
+				System.out.println("TEST #12 " + exception.getMessage() );
 			}
 	}
 	
@@ -246,15 +249,16 @@ public class TestPersonasRopero {
 		try {
 			Assert.assertTrue(jose.estaDesnudo());
 			jose.vestirSugerencia(ropero, hoy);
+			System.out.println("TEST #13 " + jose.getPrendas().toString());
 			Assert.assertTrue(!jose.estaDesnudo());
 			Assert.assertEquals(5,jose.getPrendas().size());
 			Assert.assertEquals(19,ropero.capacidadDisponible());
 			}
 		catch (SinPrendasException exception) {
-				System.out.print("TEST #13 " + exception.getMessage());
+				System.out.println("TEST #13 " + exception.getMessage());
 			}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #13 " + exception.getMessage());
+			System.out.println("TEST #13 " + exception.getMessage());
 		}
 	}
 
@@ -268,10 +272,10 @@ public class TestPersonasRopero {
 			Assert.assertEquals(20,ropero.capacidadDisponible());
 			}
 		catch (SinPrendasException exception) {
-				System.out.print("TEST #14 " + exception.getMessage());
+				System.out.println("TEST #14 " + exception.getMessage());
 			}
 		catch (RoperoFullException exception) {
-			System.out.print("TEST #14 " + exception.getMessage());
+			System.out.println("TEST #14 " + exception.getMessage());
 		}
 	}
 	
