@@ -91,7 +91,7 @@ public class TestPersonaPrenda {
 		Assert.assertFalse(jose.leCalzaBien(camisa));
 		jose.setEstilo(new Estilo("Formal"));
 		jose.setTalla(50);
-		jose.setEdad(78);
+		jose.setEdad(80);
 		Assert.assertTrue(jose.leCalzaBien(camisa));
 	}
 
