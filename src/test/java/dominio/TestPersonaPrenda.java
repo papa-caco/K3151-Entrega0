@@ -37,7 +37,7 @@ public class TestPersonaPrenda {
 	this.jose = new Hombre("Jose",35,48,new Estilo("Casual"), prendas);
 	}
 	
-	@Test // -- T E S T #01 --//
+	@Test // -- T E S T #01 -- //
 	public void nro01_aJoseLeVaBienPantalon() {
 		Assert.assertTrue(jose.leCalzaBien(pantalon));
 		Assert.assertEquals(0,jose.getPrendas().size());
