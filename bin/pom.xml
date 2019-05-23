@@ -1,0 +1,29 @@
+<project>
+ <modelVersion> 4.0.0 </modelVersion>
+ <groupId> Entrega0 </groupId>
+ <artifactId> Entrega0 </artifactId>
+ <version> 1 </version>
+ <build>
+  <plugins>
+   <plugin>
+    <artifactId> maven-compiler-plugin </artifactId>
+    <version> 3.1 </version>
+    <configuration>
+     <source> 1.8 </source>
+     <target> 1.8 </target>
+    </configuration>
+   </plugin>
+  </plugins>
+ </build>
+   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+ <!-- Dependencias -->
+ <dependencies>
+  <dependency>
+   <groupId> junit </groupId>
+   <artifactId> junit </artifactId>
+   <version> 4.12 </version>
+  </dependency>
+ </dependencies>
+</project>
