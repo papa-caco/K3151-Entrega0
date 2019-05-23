@@ -14,7 +14,7 @@ public class TestClima {
    	this.hoy = new Fecha(clima);
 	}
     	
-    @Test // -- T E S T #01 --//
+    @Test // -- T E S T #01 -- //
      public void nro01_consultoTermicaYcondiciones() {
     	System.out.println("TEST #03 - El clima de hoy, " + hoy.getFecha() + " es: " + hoy.climaActual() + ", " + hoy.condicionesClima() + ".");
     	Assert.assertEquals("Templado",hoy.climaActual());
