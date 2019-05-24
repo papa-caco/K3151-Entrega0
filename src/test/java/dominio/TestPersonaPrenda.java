@@ -2,9 +2,11 @@ package dominio;
 //import dominio.clima.*;
 import dominio.persona.*;
 import dominio.prenda.*;
+import dominio.ropero.*;
 import dominio.excepciones.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,23 +20,25 @@ public class TestPersonaPrenda {
 	private Tela algodonNyR;
 	private List<String> prendasAlgodon;
 	private TipoPrenda calzoncillo;
+	private Ropero ropero;
 	
 	@Before
 	public void init() throws TelaInapropiadaException, ColorDuplicadoException, PrendaNoLeVaException {
-	this.pantalonVestir = new TipoPrenda("Pantalon","Piernas","Basico","Masculino");
+	this.pantalonVestir = new TipoPrenda("Pantalon","Piernas","Basico");
 	this.prendasGabardina = Arrays.asList("Pantalon","Campera","Calzoncillo");
-	this.gabardinaNegra = new Tela("Gabardina","Frio",new Color("Negro"));
+	this.gabardinaNegra = new Tela("Gabardina",new Color("Negro"));
 	this.gabardinaNegra.setParaTipoPrenda(prendasGabardina);
-	this.calzoncillo = new TipoPrenda("Calzoncillo","IntimasMasculina","Interior","Masculino");
-	this.algodonNyR = new Tela("Algodon","Calido",new Color("Negro"),new Color("Rojo"));
-	this.prendasAlgodon = Arrays.asList("Remera","Camisa","Medias","Bombacha");
+	this.calzoncillo = new TipoPrenda("Calzoncillo","IntimasMasculina","Interior");
+	this.algodonNyR = new Tela("Algodon",new Color("Negro"),new Color("Rojo"));
+	this.prendasAlgodon = Arrays.asList("Pantalon","Camisa","Medias","Bombacha");
 	this.algodonNyR.setParaTipoPrenda(prendasAlgodon);
 	this.jose = new Persona("Jose",40,"masculino",48);
+	this.ropero = new Ropero("Ropero1");
 	}
 	
 	@Test // -- T E S T #02 --//
 	public void nro02_GabardinaNoSirveParaCalzoncillo() {
-		Assert.assertTrue(gabardinaNegra.aptoTipoPrenda(pantalonVestir));
+		Assert.assertTrue(algodonNyR.aptoTipoPrenda(pantalonVestir));
 	}
 	
 	@Test // -- T E S T #03 --//
@@ -42,6 +46,25 @@ public class TestPersonaPrenda {
 		Assert.assertTrue(jose.esVaron());
 		Assert.assertFalse(jose.esMujer());
 	}
+	
+	@Test // -- T E S T #03 --//
+	public void nro04_prueboIterar() {
+		List<String> lista = new LinkedList<>();
+		lista.addAll(Arrays.asList("Anibal","Alberto","Jose","Pepe","Antonio","Americo"));
+		System.out.println(this.ropero.stringsStartsWithA(lista));
+		Assert.assertTrue(jose.esVaron());
+		Assert.assertFalse(jose.esMujer());
+	}
+	
+	@Test // -- T E S T #05 --//
+	public void nro05_prueboIterar2() {
+		List<String> lista = new LinkedList<>();
+		lista.addAll(Arrays.asList("Anibal","Alberto","Jose","Pepe","Antonio","Americo"));
+		System.out.println(this.ropero.listaIterada(lista,2));
+		Assert.assertTrue(jose.esVaron());
+		Assert.assertFalse(jose.esMujer());
+	}
 }
+
 
 

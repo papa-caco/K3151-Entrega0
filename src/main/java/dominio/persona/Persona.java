@@ -53,31 +53,7 @@ public class Persona {
 		this.talla = talla;
 	}
 	
-	protected boolean esBebe() {
-		return this.edad <= 3;
-	}
-
-	protected boolean esNinio() {
-		return this.edad > 3 && this.edad <= 16;
-	}
 	
-	protected boolean esAnciano() {
-		return this.edad >= 75;
-	}
-
-	protected boolean coincideTalla(Prenda prenda) {
-		return this.talla == prenda.getTalla();
-	}
-	
-	protected boolean coincideGenero(Prenda prenda) {
-		return this.sexo() == prenda.paraGenero();
-	}
-	
-	public boolean leCalzaBien(Prenda prenda) {
-		return this.coincideTalla(prenda) 
-			&& this.coincideGenero(prenda);
-	}
-
 	public boolean esVaron() {
 		return this.sexo == "masculino";
 	}
@@ -86,21 +62,4 @@ public class Persona {
 		return this.sexo == "femenino";
 	}
 
-	public String franjaEtarea() {
-		if (this.esBebe()) {
-			return "Bebe";
-			}
-		if (this.esNinio()) {
-			return "Ninio";
-			}
-		if (this.esAnciano()) {
-			return "Anciano";
-			}
-		else {
-			return "Adulto";
-		}
-	}
-
 }
-
-

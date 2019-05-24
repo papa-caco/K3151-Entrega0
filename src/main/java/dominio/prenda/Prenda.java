@@ -1,25 +1,12 @@
 package dominio.prenda;
 
-import dominio.ropero.*;
 import dominio.excepciones.*;
-//import dominio.personas.*;
 
 public class Prenda {
 	
-	private String articulo;
-	private int talla;
 	private TipoPrenda tipo;
 	private Tela tela;
-	private Ropero ropero;
 		
-	public String getArticulo() {
-		return articulo;
-	}
-
-	public int getTalla() {
-		return talla;
-	}
-
 	public TipoPrenda getTipo() {
 		return tipo;
 	}
@@ -28,19 +15,11 @@ public class Prenda {
 		return tela;
 	}
 
-	public Ropero getRopero() {
-		return ropero;
-	}
-
-	public void setArticulo(String articulo) {
-		this.articulo = articulo;
-	}
-
 	public void setTipo(TipoPrenda tipo) {
 		this.tipo = tipo;
 	}
 
-	protected void tela(Tela tela) throws TelaInapropiadaException {
+	private void tela(Tela tela) throws TelaInapropiadaException {
 		
 		if (tela.aptoTipoPrenda(this.tipo)) {
 			this.tela = tela;
@@ -59,25 +38,20 @@ public class Prenda {
 		}
 	}
 
-	public void setRopero(Ropero ropero) {
-		this.ropero = ropero;
+	public boolean esDeCategoria(String categoria) {
+		return this.tipo.getCategoria() == categoria; 
+	}
+	
+	public boolean esDeTipo(String tipo) {
+		return this.tipo.getTipo() == tipo; 
 	}
 
-	public boolean paraPonerEn(String donde) {
-		return tipo.getSePoneEn() == donde; 
+	public boolean esDeFucion(String funcion) {
+		return this.tipo.getFuncion() == funcion; 
 	}
-	
-	public boolean categoria(String unaCategoria) {
-		return tipo.getCategoria() == unaCategoria; 
-	}
-	
+
 	public String tipoPrenda() {
-		return this.getTipo().tipo();
-	}
-	
-	
-	public String paraGenero() {
-		return tipo.getGenero();
+		return this.tipo.getTipo();
 	}
 	
 	public String colorBase() {
@@ -88,7 +62,7 @@ public class Prenda {
 		return this.getTela().SegundoColor();
 	}
 	
-	public Boolean prendaDe2Colores() {
+	public Boolean esDe2Colores() {
 		return !this.getTela().esDeUnSoloColor();
 	}
 	
