@@ -7,13 +7,20 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.Assert;
+
 import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.primitives.Ints;
 
 import java.util.Arrays;
 //import dominio.clima.*;
+import java.util.Collection;
 
 public class Ropero {
 	
@@ -77,9 +84,22 @@ public class Ropero {
 		 return FluentIterable.from(listOfString).filter(selectStartsWithA).toList();
 	}
 	
-	 public List<List<String>> listaIterada(List<String> listOfString, int max) { 
+	 public List<List<String>> listaParticionada(List<String> listOfString, int max) { 
        return  Lists.partition(listOfString,max);
 	
 	 }
 	
+		public Collection<List<Integer>> permutations () {
+
+		    List<Integer> vals = Ints.asList(new int[] {1, 2, 3, 4});
+
+		    Collection<List<Integer>> orderPerm = Collections2.permutations(vals);
+
+		    for (List<Integer> val : orderPerm) {
+		       orderPerm.add(val);
+		    }
+
+		    return orderPerm;
+		}
+
 }

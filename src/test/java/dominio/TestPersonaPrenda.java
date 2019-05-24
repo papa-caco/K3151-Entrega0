@@ -6,11 +6,15 @@ import dominio.ropero.*;
 import dominio.excepciones.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.common.collect.Collections2;
+import com.google.common.primitives.Ints;
 
 public class TestPersonaPrenda {
 	private Persona jose;
@@ -57,13 +61,11 @@ public class TestPersonaPrenda {
 	}
 	
 	@Test // -- T E S T #05 --//
-	public void nro05_prueboIterar2() {
-		List<String> lista = new LinkedList<>();
-		lista.addAll(Arrays.asList("Anibal","Alberto","Jose","Pepe","Antonio","Americo"));
-		System.out.println(this.ropero.listaIterada(lista,2));
-		Assert.assertTrue(jose.esVaron());
-		Assert.assertFalse(jose.esMujer());
+	public void nro05_listaListas() {
+		Assert.assertEquals(24,this.ropero.permutations().size());
+		System.out.println(this.ropero.permutations());
 	}
+
 }
 
 
